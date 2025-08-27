@@ -1,58 +1,62 @@
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import Link from "next/link";
 import Image from "next/image";
 
+// 1. Define your book type
+interface Book {
+  slug: string;
+  title: string;
+  cover?: string;
+  author?: string;
+}
+
 export default function Home() {
+  // 2. Read all markdown files
+  const booksDir = path.join(process.cwd(), "content/books");
+  const files = fs.readdirSync(booksDir);
+
+  // 3. Parse frontmatter and map to Book[]
+  const books: Book[] = files.map((filename) => {
+    const fileContent = fs.readFileSync(path.join(booksDir, filename), "utf-8");
+    const { data } = matter(fileContent);
+    return {
+      slug: filename.replace(".md", ""),
+      title: data.title,
+      cover: data.cover,
+      author: data.author,
+    };
+  });
+
   return (
     <main className="min-h-screen p-6 bg-offWhite">
-      <h1 className="text-4xl font-bold text-tealDark mb-4">Book Summary & Review Blog</h1>
-      <p className="text-tealDark mb-8">
-        Discover recent books with summaries, reviews, and insights.
-      </p>
+      <h1 className="text-4xl font-bold text-tealDark mb-4">
+        Book Summary & Review Blog
+      </h1>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {/* Book 1 */}
-        <div className="p-6 bg-yellowSoft rounded shadow hover:shadow-lg transition">
-          <div className="relative w-full h-48 mb-4 rounded overflow-hidden">
-            <Image
-              src="/Atomic_habits.jpg"  // local or remote image
-              alt="Atomic Habits"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-          <h2 className="text-tealDark font-semibold text-xl mb-2">Atomic Habits</h2>
-          <p className="text-tealDark">A book on building good habits and breaking bad ones.</p>
-        </div>
-
-        {/* Book 2 */}
-        <div className="p-6 bg-redCoral rounded shadow hover:shadow-lg transition">
-          <div className="relative w-full h-48 mb-4 rounded overflow-hidden">
-            <Image
-              src="/project-hail-mary.webp"
-              alt="Project Hail Mary"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-          <h2 className="text-offWhite font-semibold text-xl mb-2">Project Hail Mary</h2>
-          <p className="text-offWhite">Sci-fi adventure about a lone astronaut saving humanity.</p>
-        </div>
-
-        {/* Book 3 */}
-        <div className="p-6 bg-turquoise rounded shadow hover:shadow-lg transition">
-          <div className="relative w-full h-48 mb-4 rounded overflow-hidden">
-            <Image
-              src="/midnight-library.webp"
-              alt="The Midnight Library"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-          <h2 className="text-tealDark font-semibold text-xl mb-2">The Midnight Library</h2>
-          <p className="text-tealDark">A story exploring alternate lives and choices.</p>
-        </div>
+        {books.map((book) => (
+          <Link
+            key={book.slug}
+            href={`/books/${book.slug}`}
+            className="block p-6 rounded shadow hover:shadow-lg transition bg-yellowSoft no-underline"
+          >
+            <div className="relative w-full h-48 mb-4 rounded overflow-hidden">
+              {book.cover && (
+                <Image
+                  src={book.cover}
+                  alt={book.title}
+                  fill
+                  className="object-cover"
+                />
+              )}
+            </div>
+            <h2 className="text-tealDark font-semibold text-xl mb-2">
+              {book.title}
+            </h2>
+          </Link>
+        ))}
       </div>
     </main>
   );

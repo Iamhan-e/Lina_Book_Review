@@ -1,6 +1,6 @@
 ---
 title: "Atomic Habits"
-cover: "/Atomic-habits.jpg"
+cover: "/Atomic_habits.jpg"
 author: "James Clear"
 ---
 
