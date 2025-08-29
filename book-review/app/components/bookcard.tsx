@@ -1,25 +1,37 @@
-// components/BookCard.tsx
-import Link from "next/link";
 import Image from "next/image";
+import StarRating from "./StarRating";
 
-interface Props {
-  slug: string;
+type BookCardProps = {
+  slug: string; 
   title: string;
-  cover?: string;
-  bg?: string; // optional background color class
-}
+  author: string;
+  cover: string;
+  summary: string;
+  bg: string; 
+};
 
-export default function BookCard({ slug, title, cover, bg = "bg-yellowSoft" }: Props) {
+export default function BookCard({ title, author, cover, summary }: BookCardProps) {
   return (
-    <Link href={`/books/${slug}`} className={`${bg} block p-5 rounded-lg shadow hover:shadow-lg transition no-underline`}>
-      <div className="relative w-full h-48 mb-4 rounded overflow-hidden">
-        {cover ? (
-          <Image src={cover} alt={title} fill className="object-cover" />
-        ) : (
-          <div className="w-full h-full bg-tealDark flex items-center justify-center text-offWhite">No Image</div>
-        )}
+    <div className="flex gap-4 bg-white rounded-2xl shadow p-4 hover:shadow-lg transition">
+      {/* Fixed size image like Goodreads */}
+      <div className="relative w-24 h-36 flex-shrink-0">
+        <Image
+          src={cover}
+          alt={title}
+          fill
+          className="object-cover rounded-md"
+        />
       </div>
-      <h3 className="text-xl font-semibold text-tealDark">{title}</h3>
-    </Link>
+
+      {/* Book info */}
+      <div className="flex flex-col justify-between">
+        <div>
+          <h3 className="text-lg font-bold">{title}</h3>
+          <p className="text-gray-600 text-sm">by {author}</p>
+        </div>
+        <StarRating initial={4} />
+        <p className="text-sm text-gray-700 line-clamp-3">{summary}</p>
+      </div>
+    </div>
   );
 }

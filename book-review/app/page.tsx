@@ -3,7 +3,8 @@ import path from "path";
 import matter from "gray-matter";
 import Link from "next/link";
 import Image from "next/image";
-import Bookcard from "../app/components/bookcard";
+import Bookcard from "../app/components/Bookcard";
+
 
 // 1. Define your book type
 interface Book {
@@ -39,10 +40,11 @@ export default function Home() {
       {books.map((b, i) => (
         <Bookcard
           key={b.slug}
-          slug={b.slug}
+          slug={b.slug ?? ""}
           title={b.title}
-          cover={b.cover}
+          cover={b.cover ?? "/atomic_habits.jpg"}
           bg={i % 3 === 0 ? "bg-yellowSoft" : i % 3 === 1 ? "bg-redCoral" : "bg-turquoise"}
+          
         />
       ))}
     </div>
