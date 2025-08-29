@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import Link from "next/link";
 import Image from "next/image";
+import Bookcard from "../app/components/bookcard";
 
 // 1. Define your book type
 interface Book {
@@ -29,35 +30,22 @@ export default function Home() {
     };
   });
 
-  return (
-    <main className="min-h-screen p-6 bg-offWhite">
-      <h1 className="text-4xl font-bold text-tealDark mb-4">
-        Book Summary & Review Blog
-      </h1>
+ return (
+  <main className="min-h-screen p-6">
+    <h1 className="text-4xl font-bold text-tealDark mb-4">Book Summary & Review Blog</h1>
+    <p className="text-tealDark mb-8">Summaries & reviews of recent books.</p>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {books.map((book) => (
-          <Link
-            key={book.slug}
-            href={`/books/${book.slug}`}
-            className="block p-6 rounded shadow hover:shadow-lg transition bg-yellowSoft no-underline"
-          >
-            <div className="relative w-full h-48 mb-4 rounded overflow-hidden">
-              {book.cover && (
-                <Image
-                  src={book.cover}
-                  alt={book.title}
-                  fill
-                  className="object-cover"
-                />
-              )}
-            </div>
-            <h2 className="text-tealDark font-semibold text-xl mb-2">
-              {book.title}
-            </h2>
-          </Link>
-        ))}
-      </div>
-    </main>
-  );
+    <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      {books.map((b, i) => (
+        <Bookcard
+          key={b.slug}
+          slug={b.slug}
+          title={b.title}
+          cover={b.cover}
+          bg={i % 3 === 0 ? "bg-yellowSoft" : i % 3 === 1 ? "bg-redCoral" : "bg-turquoise"}
+        />
+      ))}
+    </div>
+  </main>
+);
 }
