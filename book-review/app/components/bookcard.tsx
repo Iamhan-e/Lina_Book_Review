@@ -2,35 +2,32 @@ import Image from "next/image";
 import StarRating from "./StarRating";
 
 type BookCardProps = {
-  slug: string; 
+  slug: string;
   title: string;
   author: string;
-  cover: string;
   summary: string;
-  bg: string; 
+  cover: string;
+  bg: string;
 };
 
-export default function BookCard({ title, author, cover, summary }: BookCardProps) {
+export default function BookCard({ slug, title, author, summary, cover, bg }: BookCardProps) {
   return (
-    <div className="flex gap-4 bg-white rounded-2xl shadow p-4 hover:shadow-lg transition">
-      {/* Fixed size image like Goodreads */}
+    <div className={`${bg} flex gap-4 p-4 rounded-2xl shadow hover:shadow-lg transition`}>
+      {/* Book Cover */}
       <div className="relative w-24 h-36 flex-shrink-0">
-        <Image
-          src={cover}
-          alt={title}
-          fill
-          className="object-cover rounded-md"
-        />
+        <Image src={cover} alt={title} fill className="object-cover rounded-md" />
       </div>
 
-      {/* Book info */}
-      <div className="flex flex-col justify-between">
+      {/* Book Info */}
+      <div className="flex flex-col justify-between flex-1">
         <div>
           <h3 className="text-lg font-bold">{title}</h3>
-          <p className="text-gray-600 text-sm">by {author}</p>
+          <p className="text-gray-600 text-sm">{author}</p>
+          <p className="text-gray-700 text-sm line-clamp-3 mt-1">{summary}</p>
         </div>
+
+        {/* Star Rating */}
         <StarRating initial={4} />
-        <p className="text-sm text-gray-700 line-clamp-3">{summary}</p>
       </div>
     </div>
   );
