@@ -2,6 +2,7 @@
 import "./globals.css";
 import Link from "next/link";
 import { Poppins } from "next/font/google";
+import Navbar from "./components/navbar";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["300","400","600","700"] });
 
@@ -12,6 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${poppins.className} bg-offWhite text-tealDark`}>
         {/* header/footer + main (see next step for header code) */}
+        <Navbar/>
         {children}
       </body>
     </html>
