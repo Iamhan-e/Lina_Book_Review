@@ -1,7 +1,7 @@
 ---
 title: "The Poppy War"
 author: "R.F. Kuang"
-cover: "/poppy-war.jpeg"
+cover: "/poppy-war.jpg"
 summary: "When an orphan girl from a poor province unexpectedly aces a national test, she earns a spot at the most elite military academy in the Nikan Empire. But her new life at the academy is far from easy. Targeted by her classmates for her dark skin, poverty, and gender, Rin discovers she has a rare and powerful gift: the ability to call on the vengeful god known as the Phoenix.With a new war against the neighboring Federation on the horizon, Rin's newfound shamanic powers may be the only thing that can save her people. But as she trains with a strange teacher and explores the depths of her deadly abilities, she fears that winning the war may come at the cost of her own humanity."
 ---
 
