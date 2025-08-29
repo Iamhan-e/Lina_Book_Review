@@ -1,34 +1,30 @@
 "use client";
+
 import { useState } from "react";
 import { Star } from "lucide-react";
 
 type StarRatingProps = {
-  initial?: number;
-  max?: number;
-  onChange?: (value: number) => void;
+  initial?: number; // initial rating (1-5)
 };
 
-export default function StarRating({ initial = 0, max = 5, onChange }: StarRatingProps) {
+export default function StarRating({ initial = 0 }: StarRatingProps) {
   const [rating, setRating] = useState(initial);
   const [hover, setHover] = useState(0);
 
-  const handleClick = (value: number) => {
-    setRating(value);
-    if (onChange) onChange(value);
-  };
-
   return (
-    <div className="flex items-center gap-1 mt-2">
-      {Array.from({ length: max }, (_, i) => {
-        const value = i + 1;
+    <div className="flex gap-1">
+      {[1, 2, 3, 4, 5].map((i) => {
+        const isActive = i <= (hover || rating);
         return (
           <Star
-            key={value}
+            key={i}
             className={`w-5 h-5 cursor-pointer transition ${
-              value <= (hover || rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-400"
+              isActive
+                ? "text-yellow-400 fill-current"
+                : "text-gray-300"
             }`}
-            onClick={() => handleClick(value)}
-            onMouseEnter={() => setHover(value)}
+            onClick={() => setRating(i)}
+            onMouseEnter={() => setHover(i)}
             onMouseLeave={() => setHover(0)}
           />
         );
