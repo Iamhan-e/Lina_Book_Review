@@ -2,11 +2,10 @@
 title: "Project Hail Mary"
 cover: "/project-hail-mary.webp"
 author: "Andy Weir"
+summary: "Project Hail Mary is a thrilling science-fiction story about a lone astronaut on a mission to save humanity.The protagonist wakes up with amnesia and gradually discovers the stakes of his mission, filled with unexpected challenges"
 ---
 
-## Summary
-"Project Hail Mary" is a thrilling science-fiction story about a lone astronaut on a mission to save humanity.  
-The protagonist wakes up with amnesia and gradually discovers the stakes of his mission, filled with unexpected challenges.
+
 
 ## Review
 This book is gripping from start to finish.  

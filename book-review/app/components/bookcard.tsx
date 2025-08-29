@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import StarRating from "./StarRating";
 
 type BookCardProps = {
@@ -12,9 +13,9 @@ type BookCardProps = {
 
 export default function BookCard({ slug, title, author, summary, cover, bg }: BookCardProps) {
   return (
-    <div className={`${bg} flex gap-4 p-4 rounded-2xl shadow hover:shadow-lg transition`}>
+    <Link href={`/books/${slug}`} className={`${bg} flex gap-4 p-4 rounded-2xl shadow hover:shadow-lg transition`}>
       {/* Book Cover */}
-      <div className="relative w-24 h-36 flex-shrink-0">
+      <div className="relative w-24 h-35 flex-shrink-0">
         <Image src={cover} alt={title} fill className="object-cover rounded-md" />
       </div>
 
@@ -26,9 +27,10 @@ export default function BookCard({ slug, title, author, summary, cover, bg }: Bo
           <p className="text-gray-700 text-sm line-clamp-3 mt-1">{summary}</p>
         </div>
 
-        {/* Star Rating */}
+        
+
         <StarRating initial={4} />
       </div>
-    </div>
+    </Link>
   );
 }
