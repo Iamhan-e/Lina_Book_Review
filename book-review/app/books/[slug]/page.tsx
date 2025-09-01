@@ -11,10 +11,9 @@ import Reviews from "../../components/Reviews"
 type PageProps = {
   params: { slug: string };
 };
+export default async function BookPage({ params }: PageProps) {
+  const { slug } = await params;
 
-export default function BookPage({ params }: PageProps) {
-  // Make sure this file is a SERVER COMPONENT (no "use client" here)
-  const {slug} = params;
 
   const filePath = path.join(process.cwd(), "content/books", `${slug}.md`);
   if (!fs.existsSync(filePath)) return <p>Book not found.</p>;
@@ -62,7 +61,7 @@ export default function BookPage({ params }: PageProps) {
         </div>
       )}
 
-      
+
        <div className="p-6">
       <h1 className="text-2xl font-bold">{slug}</h1>
       {/* other book content from md file here */}
