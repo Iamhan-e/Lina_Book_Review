@@ -6,6 +6,7 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import StarRating from "../../components/StarRating";
 import { ArrowLeft } from "lucide-react";
+import Reviews from "../../components/Reviews"
 
 type PageProps = {
   params: { slug: string };
@@ -13,7 +14,7 @@ type PageProps = {
 
 export default function BookPage({ params }: PageProps) {
   // Make sure this file is a SERVER COMPONENT (no "use client" here)
-  const slug = params.slug;
+  const {slug} = params;
 
   const filePath = path.join(process.cwd(), "content/books", `${slug}.md`);
   if (!fs.existsSync(filePath)) return <p>Book not found.</p>;
@@ -60,6 +61,13 @@ export default function BookPage({ params }: PageProps) {
           <ReactMarkdown>{book.review}</ReactMarkdown>
         </div>
       )}
+
+      
+       <div className="p-6">
+      <h1 className="text-2xl font-bold">{slug}</h1>
+      {/* other book content from md file here */}
+      <Reviews slug={slug} />
+    </div>
     </div>
   );
 }
