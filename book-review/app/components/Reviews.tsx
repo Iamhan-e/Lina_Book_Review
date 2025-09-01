@@ -72,15 +72,16 @@ export default function Reviews({ slug }: ReviewsProps) {
 
       {/* Review List */}
       <ul>
-        {reviews.map((review) => (
-          <li key={review.id} className="border-b py-2">
-            <p className="font-bold">{review.author}</p>
-            <p>{review.content}</p>
-            <small className="text-gray-500">
-              {new Date(review.createdAt).toLocaleString()}
-            </small>
-          </li>
-        ))}
+       {reviews.map((review) => (
+  <div key={review.id} className="p-2 border-b">
+    <p className="font-semibold">{review.author}</p>
+    <p>{review.content}</p>
+    <span className="text-sm text-gray-500">
+      {new Date(review.createdAt).toLocaleString()}
+    </span>
+  </div>
+))}
+
       </ul>
     </div>
   )
