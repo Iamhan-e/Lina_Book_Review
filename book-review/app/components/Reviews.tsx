@@ -28,7 +28,7 @@ export default function Reviews({ slug }: ReviewsProps) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
   e.preventDefault();
-    const newReview = { bookSlug: slug, author, content }
+    const newReview = { slug, author, content }
 
     const res = await fetch("/api/reviews", {
       method: "POST",
