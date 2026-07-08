@@ -13,7 +13,7 @@ export async function GET(request: Request) {
   }
 
   const reviews = await prisma.review.findMany({
-    where: { bookSlug: slug },
+    where: { slug },
     orderBy: { createdAt: "desc" },
   });
 
@@ -23,14 +23,14 @@ export async function GET(request: Request) {
 // POST /api/reviews
 export async function POST(request: Request) {
   const body = await request.json();
-  const { author, content, bookSlug } = body;
+  const { author, content, slug } = body;
 
-  if (!author || !content || !bookSlug) {
+  if (!author || !content || !slug) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
   const review = await prisma.review.create({
-    data: { author, content, bookSlug },
+    data: { author, content, slug },
   });
 
   return NextResponse.json(review);
