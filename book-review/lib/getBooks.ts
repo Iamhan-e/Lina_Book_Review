@@ -19,6 +19,7 @@ export function getAllBooks(): BookData[] {
     const { data } = matter(content);
 
     return {
+      
       slug: file.replace(".md", ""),
       title: data.title ?? "Untitled",
       author: data.author ?? "Unknown",
