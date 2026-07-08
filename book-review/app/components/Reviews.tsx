@@ -1,8 +1,14 @@
-// components/Reviews.js
+
 "use client"
 
 import { useEffect, useState } from "react"
-import type { Review } from "@prisma/client";
+type Review = {
+  id: number;
+  slug: string;
+  author: string;
+  content: string;
+  createdAt: string;
+};
 
 type ReviewsProps = {
   slug: string
