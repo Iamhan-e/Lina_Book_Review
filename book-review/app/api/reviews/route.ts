@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../../prisma/generated/client/client";
+import { PrismaLibSql } from "@prisma/adapter-libsql";
 
-const prisma = new PrismaClient();
+const adapter = new PrismaLibSql({
+  url: process.env.DATABASE_URL || "file:./prisma/dev.db",
+});
+
+const prisma = new PrismaClient({ adapter });
 
 // GET /api/reviews?slug=book-slug
 export async function GET(request: Request) {
