@@ -18,8 +18,12 @@ export default function Reviews({ slug }: ReviewsProps) {
   // Load reviews on mount
   useEffect(() => {
     fetch(`/api/reviews?slug=${slug}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        return res.json()
+      })
       .then(setReviews)
+      .catch(() => setReviews([]))
   }, [slug])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
